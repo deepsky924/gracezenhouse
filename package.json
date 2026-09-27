@@ -1,0 +1,9 @@
+{
+  "name": "gracezenhouse",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node --watch-path=build.mjs --watch-preserve-output build.mjs --serve"
+  }
+}
