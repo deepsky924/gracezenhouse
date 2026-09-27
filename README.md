@@ -18,6 +18,13 @@ docker build -t gracezenhouse . && docker run --rm -p 8080:80 gracezenhouse
 | `src/public/` | Copied to the site root: favicon, `og-image.png` (source: `src/og-image.svg`) |
 | `nginx.conf` | Serving, `/health`, 301s from retired pages of the old site |
 
+## Deploying on Cloudflare
+
+Pages: build command `node build.mjs`, output directory `dist`, env `NODE_VERSION=24`.
+The build writes `dist/_redirects` (301s from the old site's URLs) and `dist/_headers`
+(security + asset caching), which Cloudflare Pages and Workers static assets both read.
+The redirect list lives in `build.mjs`; keep `nginx.conf` in step if Coolify stays in use.
+
 ## Before launch
 
 - **Owner name & credentials** — placeholders in `owner` in `src/data.mjs` (set `isPlaceholder: false` once filled; placeholders render highlighted).

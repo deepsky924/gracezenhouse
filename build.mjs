@@ -1091,6 +1091,45 @@ ${body}
   );
   writeFileSync(join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${site.url}/sitemap.xml\n`);
 
+  // ── Cloudflare Pages / Workers static assets ─────────────────────────────
+  // Retired pages from the previous site → closest current page (mirrors nginx.conf).
+  // First match wins, so exact paths come before the catch-all splats.
+  const legacy = [
+    ['/home', '/'],
+    ['/terms', '/'],
+    ['/track', '/'],
+    ['/blog/anti-aging-facials-rancho-cucamonga', '/services/facial-treatments/'],
+    ['/blog/reiki-anti-aging', '/services/reiki/'],
+    ['/blog/dermaplaning-vs-microdermabrasion', '/services/facial-treatments/dermaplaning-facial/'],
+    ['/blog/brazilian-wax-aftercare', '/services/waxing-services/brazilian-wax/'],
+    ['/blog/facials-for-sensitive-skin', '/services/facial-treatments/sensitive-skin-facial/'],
+    ['/blog/hydrafacial-vs-oxygen-rx', '/services/facial-treatments/hydrafacial/'],
+    ['/blog/back-facial-benefits', '/services/facial-treatments/customized-back-facial/'],
+    ['/blog/mens-waxing-skincare', '/services/waxing-services/'],
+    ['/blog/led-light-therapy-anti-aging', '/services/facial-treatments/brightening-facial-with-led/'],
+    ['/blog/rancho-cucamonga-professionals-grace-zen', '/'],
+    ['/blog', '/services/'],
+    ['/locations', '/contact/'],
+  ];
+  const redirects = [
+    ...legacy.flatMap(([from, to]) => [`${from} ${to} 301`, `${from}/ ${to} 301`]),
+    '/blog/* /services/ 301',
+    '/locations/* /contact/ 301',
+  ];
+  writeFileSync(join(DIST, '_redirects'), `${redirects.join('\n')}\n`);
+  writeFileSync(
+    join(DIST, '_headers'),
+    `/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=31536000
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+`,
+  );
+
   if (owner.isPlaceholder) warnings.push('owner name/credentials are placeholders (src/data.mjs → owner)');
   if (!facials.some((f) => f.duration)) warnings.push('facial durations not set yet (src/data.mjs → facials[].duration)');
   for (const w of warnings) console.warn(`  ⚠ ${w}`);
