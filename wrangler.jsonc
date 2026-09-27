@@ -1,0 +1,10 @@
+// Cloudflare Workers (static assets). Build: `node build.mjs` · Deploy: `npx wrangler deploy`
+{
+  "name": "gracezenhouse",
+  "compatibility_date": "2026-09-27",
+  "assets": {
+    // The build writes the whole site here, including _redirects and _headers.
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}

@@ -20,6 +20,7 @@ docker build -t gracezenhouse . && docker run --rm -p 8080:80 gracezenhouse
 
 ## Deploying on Cloudflare
 
+Workers: build command `node build.mjs`, deploy command `npx wrangler deploy` (reads `wrangler.jsonc`).
 Pages: build command `node build.mjs`, output directory `dist`, env `NODE_VERSION=24`.
 The build writes `dist/_redirects` (301s from the old site's URLs) and `dist/_headers`
 (security + asset caching), which Cloudflare Pages and Workers static assets both read.
