@@ -76,6 +76,7 @@ async function build() {
     `<svg class="i ${cls}" viewBox="${box}" aria-hidden="true" focusable="false">${body}</svg>`;
   const ARROW = svg('i--arrow', '<path d="M3.5 10h12M11 5.5l4.5 4.5-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>');
   const PHONE = svg('i--phone', '<path d="M6.3 3.3l1.9-.3a1 1 0 0 1 1.1.7l.8 2.6a1 1 0 0 1-.3 1L8.5 8.5a9.5 9.5 0 0 0 3 3l1.2-1.3a1 1 0 0 1 1-.3l2.6.8a1 1 0 0 1 .7 1.1l-.3 1.9a1.7 1.7 0 0 1-1.8 1.4A13.2 13.2 0 0 1 4.9 5.1a1.7 1.7 0 0 1 1.4-1.8z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>');
+  const INSTAGRAM = svg('i--ig', '<rect x="3" y="3" width="14" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="3.2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="14.1" cy="5.9" r="0.9" fill="currentColor"/>');
   const STAR = '<path d="M10 2.4l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 14.2l-4.6 2.5.9-5.2-3.8-3.6 5.2-.8z" fill="currentColor"/>';
   const STARS = `<span class="stars" aria-hidden="true">${Array.from({ length: 5 }, () => svg('i--star', STAR)).join('')}</span>`;
   const ENSO = `<svg class="enso" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M31.5 7.6A18 18 0 1 0 41.6 29" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg>`;
@@ -287,6 +288,7 @@ async function build() {
       <nav class="nav" aria-label="Primary">
         <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
         <ul class="nav__list" id="nav-menu">${navItems}
+          <li class="nav__social"><a href="${site.instagram.url}"${attrs(ext)}>${INSTAGRAM}<span class="nav__social-label">Instagram</span><span class="sr-only"> ${site.instagram.handle} (opens in a new tab)</span></a></li>
           <li class="nav__book">${bookAny('Book', 'btn btn--primary btn--sm')}</li>
         </ul>
       </nav>
@@ -521,6 +523,7 @@ ${body}
         </div>
         <ul class="hero__meta plain">
           <li><a class="hero__rating" href="${site.reviewsUrl}"${attrs(ext)}>${STARS}<span>${site.rating.value} · ${site.rating.count} Google reviews</span></a></li>
+          <li><a class="hero__social" href="${site.instagram.url}"${attrs(ext)}>${INSTAGRAM}<span>${site.instagram.handle}</span><span class="sr-only"> on Instagram (opens in a new tab)</span></a></li>
           <li>Now accepting new clients in Rancho Cucamonga</li>
           <li>Coming back? ${bookLink(site.bookingUrl, GENERAL, 'Book your next visit', 'hero__rebook')}</li>
         </ul>

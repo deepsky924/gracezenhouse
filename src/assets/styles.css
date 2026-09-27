@@ -202,6 +202,11 @@ mark.todo { background: rgba(184, 134, 107, 0.16); outline: 1px dashed var(--cla
 }
 .nav__list a:not(.btn):hover, .nav__list a[aria-current] { border-bottom-color: var(--sage); }
 .nav__toggle { display: none; }
+.nav__social a { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; min-width: 44px; min-height: 44px; }
+.nav__list .nav__social a:not(.btn) { padding-block: 0; border-bottom: 0; }
+.nav__list .nav__social a:hover { color: var(--sage-deep); }
+.nav__social .i { width: 1.25rem; height: 1.25rem; }
+.nav__social-label { display: none; }
 
 @media (max-width: 860px) {
   .nav__toggle {
@@ -232,6 +237,8 @@ mark.todo { background: rgba(184, 134, 107, 0.16); outline: 1px dashed var(--cla
   }
   .nav.is-open .nav__list { display: flex; }
   .nav__list a:not(.btn) { display: block; padding: 1rem 0; font-size: 0.9rem; border-bottom: 1px solid var(--linen); }
+  .nav__list .nav__social a:not(.btn) { display: flex; justify-content: flex-start; padding-block: 1rem; border-bottom: 1px solid var(--linen); }
+  .nav__social-label { display: inline; }
   .nav__book { margin-top: 1.25rem; }
   .nav__book .btn { width: 100%; }
 }
@@ -336,6 +343,9 @@ mark.todo { background: rgba(184, 134, 107, 0.16); outline: 1px dashed var(--cla
 .hero__rating { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 32px; color: var(--umber); text-decoration: none; }
 .hero__rating:hover span:last-child { text-decoration: underline; }
 .hero__rebook { color: var(--sage-deep); font-weight: 500; }
+.hero__social { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 32px; color: var(--umber); text-decoration: none; }
+.hero__social .i { width: 1.05rem; height: 1.05rem; color: var(--sage-deep); }
+.hero__social:hover span:first-of-type { text-decoration: underline; }
 .hero__portrait { position: relative; margin: 0; }
 .hero__portrait .ph__frame { height: 100%; min-height: 520px; border-radius: 0; }
 .hero__portrait figcaption {
