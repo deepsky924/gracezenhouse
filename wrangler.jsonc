@@ -2,6 +2,8 @@
 {
   "name": "gracezenhouse",
   "compatibility_date": "2026-09-27",
+  // Don't send Wrangler CLI usage telemetry to Cloudflare.
+  "send_metrics": false,
   "assets": {
     // The build writes the whole site here, including _redirects and _headers.
     "directory": "./dist",
